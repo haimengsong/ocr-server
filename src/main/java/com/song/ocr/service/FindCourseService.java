@@ -1,4 +1,9 @@
 package com.song.ocr.service;
 
-public class FindCourseService {
+import com.song.ocr.domain.Course;
+
+import java.util.List;
+
+public interface FindCourseService {
+    List<Course> findCourse(String jobDescription);
 }
