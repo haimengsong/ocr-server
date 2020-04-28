@@ -1,5 +1,7 @@
 package com.song.ocr;
 
+import com.song.ocr.elasticsearch.SearchService;
+import com.song.ocr.elasticsearch.impl.SearchServiceImpl;
 import com.song.ocr.extractor.JobDescriptionExtractor;
 import com.song.ocr.service.FindCourseService;
 import com.song.ocr.service.Impl.FindCourseServiceImpl;
@@ -44,5 +46,10 @@ public class OnlineCourseRecommendationApiConfiguration {
         RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
 
         return client;
+    }
+
+    @Bean
+    public SearchService searchService() {
+        return new SearchServiceImpl();
     }
 }

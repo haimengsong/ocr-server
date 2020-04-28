@@ -49,7 +49,7 @@ public class SearchServiceImpl implements SearchService {
 
         List<SearchResult> results = new ArrayList<>();
 
-        Arrays.stream(searchHits).filter(Objects::isNull).forEach(
+        Arrays.stream(searchHits).filter(Objects::nonNull).forEach(
                 searchHit -> {
                     SearchResult searchResult = new SearchResult(searchHit.getSourceAsMap());
                     results.add(searchResult);
