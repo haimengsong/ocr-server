@@ -14,6 +14,7 @@ public class FindCourseController {
     @Autowired
     private FindCourseService findCourseService;
 
+    @CrossOrigin
     @RequestMapping(value = "courses", method = RequestMethod.POST)
     public List<Course> findCourse(@RequestBody String jobDescription) {
         return findCourseService.findCourse(jobDescription);
