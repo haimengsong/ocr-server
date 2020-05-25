@@ -1,7 +1,6 @@
 package com.song.ocr.controller;
 
-
-import com.song.ocr.domain.Course;
+import com.song.ocr.domain.CourseDTO;
 import com.song.ocr.service.FindCourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class FindCourseController {
 
     @CrossOrigin
     @RequestMapping(value = "courses", method = RequestMethod.POST)
-    public List<Course> findCourse(@RequestBody String jobDescription) {
+    public List<CourseDTO> findCourse(@RequestBody String jobDescription) {
         return findCourseService.findCourse(jobDescription);
     }
 }

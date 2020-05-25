@@ -58,7 +58,7 @@ public class CourseraScraper {
                         course.setCourseName(title.asText());
                         course.setDescription("");
                         course.setUrl(url.getHrefAttribute());
-                        course.setSkills("Java");
+                        course.setSkill("Java");
                         course.setScore(Double.parseDouble(score.asText()));
                         course.setEnrollmentNum(enrollment.asText());
                         course.setLevel(level.asText());
