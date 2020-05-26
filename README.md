@@ -40,8 +40,8 @@ choose MongoDB as our data store for the following reasons:
    8. tasks ask validator to validate if need parsing
    9. tasks ask parser to parse data
    10 tasks ask handler to write data into db
-* cache \
-we use Redis as in-memory database to store the top 10 best courses for each skill and each request can directly read the result from Redis
+* Redis \
+we use Redis as in-memory database to store the top 10 best courses for each skill and each request can directly read the result from Redis. Scheduled task is set up to refresh the data periodically.
 * business logic 
   * how to extract skills from job description 
   1. replace all non-alphanumerical character with empty space
