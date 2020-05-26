@@ -8,7 +8,7 @@ I believe there are many people doing the same thing like I did but the process 
 
 ## Requirement
 User can submit a job description \
-User can view the top 10 best online courses from multiple sources with highest score for each skill order by its frequency
+User can view the top 10 best online courses from multiple sources for each skill order by its frequency
 
 ## Design
 * web architecture
