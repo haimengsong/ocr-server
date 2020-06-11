@@ -14,12 +14,13 @@ public class SerializeObjectTool {
         try {
             baos = new ByteArrayOutputStream();
             oos = new ObjectOutputStream(baos);
+            oos.flush();
             oos.writeObject(object);
 
             byte[] bytes = baos.toByteArray();
             return bytes;
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return null;
     }
@@ -34,7 +35,7 @@ public class SerializeObjectTool {
 
             return ois.readObject();
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
 
         return null;

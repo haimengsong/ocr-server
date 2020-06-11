@@ -18,12 +18,15 @@ public class RedisClient {
 
         for(int i = 0; i < 20; i++) {
             Course course = new Course();
+            course.setSkill("Java");
             course.setCourseName("Java" + i);
             Random random = new Random();
             course.setScore(random.nextInt(50)/10.0);
             course.setDescription("description" + i);
             course.setEnrollmentNum(random.nextInt(20) + "k");
             course.setLevel("entry");
+            course.setPrice(0.0);
+            course.setSource("coursera");
             course.setUrl("www.coursera.com");
             courses.add(course);
         }
@@ -33,7 +36,7 @@ public class RedisClient {
 
         courses.forEach(course -> {
 
-            map.put(new String(SerializeObjectTool.serialize(course)), course.getScore());
+            map.put(Base64.getEncoder().encodeToString(SerializeObjectTool.serialize(course)), course.getScore());
         });
 
         if(redis.exists("java")) {
@@ -45,7 +48,7 @@ public class RedisClient {
 
         Set<String> values = redis.zrevrange("java", 0, 9);
 
-        List<Course> top10 = values.stream().map(v -> (Course)SerializeObjectTool.unserialize(v.getBytes())).collect(Collectors.toList());
+        List<Course> top10 = values.stream().map(v -> (Course)SerializeObjectTool.unserialize(Base64.getDecoder().decode(v.getBytes()))).collect(Collectors.toList());
 
 
         top10.forEach(course -> {
