@@ -6,17 +6,12 @@ import com.song.ocr.extractor.JobDescriptionExtractor;
 import com.song.ocr.service.FindCourseService;
 import com.song.ocr.service.Impl.FindCourseServiceImpl;
 import org.apache.http.HttpHost;
-import org.elasticsearch.client.Client;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.TransportAddress;
-import org.elasticsearch.transport.client.PreBuiltTransportClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import redis.clients.jedis.Jedis;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @Configuration
@@ -46,6 +41,11 @@ public class OnlineCourseRecommendationApiConfiguration {
         RestHighLevelClient client = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
 
         return client;
+    }
+
+    @Bean
+    public Jedis redisClient() {
+        return new Jedis("0.0.0.0", 6379);
     }
 
     @Bean

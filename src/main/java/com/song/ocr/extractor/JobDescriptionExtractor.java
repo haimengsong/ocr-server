@@ -34,9 +34,9 @@ public class JobDescriptionExtractor {
 
         String [] skills = skillset.split(",");
 
-        String [] words = jobDescription.split(" ");
+        String [] words = jobDescription.replaceAll("[^a-zA-Z0-9]", " ").split(" ");
 
-        Arrays.stream(skills).forEach(skill-> {
+        Arrays.stream(skills).filter(skill -> !skill.isEmpty()).forEach(skill-> {
 
             int frequency = 0;
             for(String word : words) {

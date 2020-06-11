@@ -96,10 +96,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
 		<dependency>
-			<groupId>org.elasticsearch.client</groupId>
-			<artifactId>elasticsearch-rest-client</artifactId>
-			<version>7.6.2</version>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.3.0</version>
 		</dependency>
 
 	</dependencies>
