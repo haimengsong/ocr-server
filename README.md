@@ -8,28 +8,52 @@ I believe there are many people doing the same thing like I did but the process 
 
 ## Requirement
 User can submit a job description \
-User can view recommended online courses for each skill order by its frequency
+User can view the top 10 best online courses from multiple sources for each skill order by its frequency
 
 ## Design
 * web architecture
   * Represent Layer: HTML5, CSS, React
   * Business Logic: Spring, SpringMVC, SpringBoot
-  * Data Access Layer: Elasticsearch Java API
-  * Data Store: ElasticSearch  
+  * Data Access Layer: Spring Data JPA
+  * Data Store: MongoDB  
 * data model \
-Course (course name, description, url, skills, score, enrollment, level, price, source)
-* data store
-* data scraping
-   * sources: Coursera (more in future)
-   * technology: HtmlUnit, XPath
-   * when to scrape and scrape how much data
-   * what if source data updated
-* cache
+![alt text](https://github.com/haimengsong/ocr-server/blob/master/course.png)
+* choice of data store \
+choose MongoDB as our data store for the following reasons:
+1. the schema of data model is not fixed and may change (compared with relational database)
+2. no need to support join and transaction (compared with relational database)
+3. write fast (compared with relational database)
+4. easy to manage data (compared with elasticsearch)
+* data management
+   * sources: Coursera (more in future work)
+   * technology: Quartz, HtmlUnit, XPath
+   * architecture
+![alt text](https://github.com/haimengsong/ocr-server/blob/master/datamanager.png)
+   * workflow 
+   1. Quartz starts data manager
+   2. data manager starts url extractors
+   3. url extractors extract url from db or web
+   4. url extractors push urls into url queue
+   5. scheduler consumes urls from url queue
+   6. scheduler create tasks and run
+   7. tasks ask fetcher to fetch data from web 
+   8. tasks ask validator to validate if need parsing
+   9. tasks ask parser to parse data
+   10 tasks ask handler to write data into db
+* Redis \
+we use Redis as in-memory database to store the top 10 best courses for each skill and each request can directly read the result from Redis. Scheduled task is set up to refresh the data periodically.
 * business logic 
   * how to extract skills from job description 
-  * rank criteria
+  1. replace all non-alphanumerical character with empty space
+  2. split words as string array
+  3. count skill frequency based on pre-configured skill set as map
+  * rank criteria \
+currently we are just simply ranking the courses by its score
+  
 ## Demo
-
+## Github
+Client Repo: https://github.com/haimengsong/ocr-client \
+Server Repo: https://github.com/haimengsong/ocr-server
 ## Future work
 
 
